@@ -23,6 +23,8 @@ A "Queue of Queues" means that QQ stores tasks in a two dimensional array.  The 
 
 The second dimension in the Queue of Queues contains the actual tasks themselves.  These stack up in chronological order so that all messages are delivered to their destination server in the order that they are sent.  This behavior is valuable for replaying transaction histories (such as ActivityPub messages) where the order of operations might matter.
 
+<img alt="AI Generated Sherlock Holmes" src="https://github.com/EmissarySocial/qq/raw/main/meta/diagram-01.jpg" style="width:100%; display:block; margin:20px 0px;">
+
 QQ processes messages by starting with the oldest channel in its queue, then processing each of the tasks in that queue in order, up to a maximum number.  The queue's processing date is reset, and QQ moves on to the next channel.  If number of messages in the channel exceeds the maximum, then the rest will be processed when the channel bubbles back to the top of its Queue.
 
 In practice, QQ will have many workers running simultaneously (configurable, of course) so many channels will be active at the same time.
